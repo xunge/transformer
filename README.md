@@ -11,3 +11,9 @@ This repository includes pytorch implementations of ["Attention is All You Need"
 - [jadore801120/attention-is-all-you-need](https://github.com/jadore801120/attention-is-all-you-need-pytorch)
 - [OpenNMT/OpenNMT-py](https://github.com/OpenNMT/OpenNMT-py)
 - [The Annotated Transformers](http://nlp.seas.harvard.edu/2018/04/03/attention.html)
+
+## Edit in 20210114
+
+fix some bugs to support pytorch 1.7
+
+python train.py -data_path ./preprocess-train.t7 -model_path ./model/ckpt.pth
