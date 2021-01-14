@@ -16,4 +16,4 @@ This repository includes pytorch implementations of ["Attention is All You Need"
 
 fix some bugs to support pytorch 1.7
 
-python train.py -data_path ./preprocess-train.t7 -model_path ./model/ckpt.pth
+`python train.py -data_path ./preprocess-train.t7 -model_path ./model/ckpt.pth`
