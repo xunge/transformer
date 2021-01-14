@@ -121,7 +121,8 @@ def load_train_data(data_path, batch_size, max_src_len, max_trg_len, use_cuda=Fa
     trg_field = Field(sequential=True, use_vocab=False, include_lengths=True, batch_first=True,
                       pad_token=PAD, unk_token=UNK, init_token=BOS, eos_token=EOS,)
     fields = (src_field, trg_field)
-    device = None if use_cuda else -1
+    # device = None if use_cuda else -1
+    device = 'cuda' if use_cuda else -1
 
     def filter_pred(example):
         if len(example.src) <= max_src_len and len(example.trg) <= max_trg_len:
@@ -148,7 +149,8 @@ def load_test_data(data_path, vocab_path, batch_size, use_cuda=False):
     src_field = Field(sequential=True, use_vocab=False, include_lengths=True, batch_first=True,
                       pad_token=PAD, unk_token=UNK, init_token=None, eos_token=None,)
     fields = (src_field, None)
-    device = None if use_cuda else -1
+    # device = None if use_cuda else -1
+    device = 'cuda' if use_cuda else -1
 
     vocab = torch.load(vocab_path)
     _, src_word2idx, _ = vocab['src_dict']

@@ -14,6 +14,7 @@ from data import data_utils
 from data.data_utils import load_train_data
 from transformer.models import Transformer
 from transformer.optimizer import ScheduledOptimizer
+os.environ["CUDA_VISIBLE_DEVICES"] = "3"
 
 use_cuda = torch.cuda.is_available()
 
@@ -121,7 +122,7 @@ def train(model, criterion, optimizer, train_iter, model_state):  # TODO: fix op
         optimizer.update_lr()
         model.proj_grad()  # works only for weighted transformer
 
-        train_loss_total += float(step_loss.data[0])
+        train_loss_total += float(step_loss)
         n_words_total += torch.sum(dec_inputs_len)
         n_sents_total += dec_inputs_len.size(0)  # batch_size
         model_state['train_steps'] += 1
@@ -166,7 +167,7 @@ def eval(model, criterion, dev_iter):
 
             dec_logits, *_ = model(enc_inputs, enc_inputs_len, dec_inputs, dec_inputs_len)
             step_loss = criterion(dec_logits, dec_targets.contiguous().view(-1))
-            eval_loss_total += float(step_loss.data[0])
+            eval_loss_total += float(step_loss)
             n_words_total += torch.sum(dec_inputs_len)
             n_sents_total += dec_inputs_len.size(0)
             print('  {} samples seen'.format(n_sents_total))

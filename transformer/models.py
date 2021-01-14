@@ -4,7 +4,7 @@ import torch.nn as nn
 import numpy as np
 from data import data_utils
 
-from transformer.modules import Linear
+# from transformer.modules import Linear
 from transformer.modules import PosEncoding
 from transformer.layers import EncoderLayer, DecoderLayer, \
                                WeightedEncoderLayer, WeightedDecoderLayer
@@ -110,7 +110,7 @@ class Transformer(nn.Module):
                                opt.max_src_seq_len, opt.src_vocab_size, opt.dropout, opt.weighted_model)
         self.decoder = Decoder(opt.n_layers, opt.d_k, opt.d_v, opt.d_model, opt.d_ff, opt.n_heads,
                                opt.max_tgt_seq_len, opt.tgt_vocab_size, opt.dropout, opt.weighted_model)
-        self.tgt_proj = Linear(opt.d_model, opt.tgt_vocab_size, bias=False)
+        self.tgt_proj = nn.Linear(opt.d_model, opt.tgt_vocab_size, bias=False)
         self.weighted_model = opt.weighted_model
 
         if opt.share_proj_weight:
